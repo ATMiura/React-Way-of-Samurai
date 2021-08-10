@@ -1,0 +1,46 @@
+.sidebar{
+    min-width: 250px;
+}
+.nav {
+    grid-area: n;
+    background-color: burlywood;
+    padding: 20px;
+    height: 100%;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: gold;
+}
+
+.friends{
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 10px 10px 10px;
+}
+.friends__list{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+.friends__item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.friends__avatar{
+    border-radius: 100%;
+    background: aqua;
+    width: 50px;
+    height: 50px;
+}
+.friends__name{
+    font-size: 16px;
+    font-weight: 500;
+}
