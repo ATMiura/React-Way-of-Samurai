@@ -55,4 +55,8 @@
 .messages .message {
 
 }
-
+.message__add{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
