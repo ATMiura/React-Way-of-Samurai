@@ -25,7 +25,8 @@ let state = {
             {id: 3, message: 'Yo', messageFriend: 'friend'},
             {id: 4, message: 'Yo', messageFriend: 'friend'},
             {id: 5, message: 'Yo', messageFriend: 'friend'}
-        ]
+        ],
+        newMessageText: 'it-kamasutra.com dialogs message',
     },
     sidebar: {
         friends: [
@@ -51,6 +52,22 @@ export let addPost = () => {
 
 export let updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export let addDialogsMessage = () => {
+    let newBlaBla = {
+        id: 6,
+        message: state.dialogsPage.newMessageText,
+        messageFriend: 0
+    };
+    state.dialogsPage.messages.push(newBlaBla);
+    state.dialogsPage.newMessageText = '';
+    rerenderEntireTree(state);
+}
+
+export let updateNewDialogsMessage = (newText) => {
+    state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
 }
 
