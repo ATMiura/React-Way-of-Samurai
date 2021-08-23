@@ -31,7 +31,7 @@ let store = {
                 {id: 4, message: 'Yo', },
                 {id: 5, message: 'Yo', }
             ],
-            newMessageText: 'it-kamasutra.com dialogs message',
+            newMessageBody: 'it-kamasutra.com dialogs message',
         },
         sidebar: {
             friends: [
@@ -73,14 +73,14 @@ let store = {
 
         } else if(action.type === SEND_MESSAGE) {
 
-            let body = this._state.dialogsPage.newMessageText;
-            this._state.dialogsPage.newMessageText = '';
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
             this._state.dialogsPage.messages.push({ id: 6, message: body });
             this._callSubscriber(this._state);
 
         } else if(action.type === UPDATE_NEW_MESSAGE_TEXT) {
 
-            this._state.dialogsPage.newMessageText = action.body;
+            this._state.dialogsPage.newMessageBody = action.body;
             this._callSubscriber(this._state);
         }
     }
