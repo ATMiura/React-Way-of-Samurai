@@ -18,7 +18,7 @@ const MyPosts = (props) => {
         let text = newPostElement.current.value;
         let action = updateNewPostTextActionCreatore(text);
         props.dispatch(action);
-    }
+    };
 
     return (
         <div className={s.postsBlock}>
