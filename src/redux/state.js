@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST',
+    UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
+    ADD_DIALOGS_MESSAGE = 'ADD_DIALOGS_MESSAGE',
+    UPDATE_NEW_DIALOGS_MESSAGE = 'UPDATE_NEW_DIALOGS_MESSAGE'
+
 let store = {
 
     _state: {
@@ -49,24 +54,8 @@ let store = {
         this._callSubscriber = observer; // observer - наблюдатель - паттерн
     },
 
-    addDialogsMessage() {
-        let newBlaBla = {
-            id: 6,
-            message: this._state.dialogsPage.newMessageText,
-            messageFriend: 0
-        };
-        this._state.dialogsPage.messages.push(newBlaBla);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
-
-    updateNewDialogsMessage(newText) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },
-
     dispatch(action) { // {type: 'ADD-POST'}
-        if(action.type === 'ADD-POST'){
+        if(action.type === ADD_POST){
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -76,13 +65,36 @@ let store = {
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
 
-        } else if(action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if(action.type === UPDATE_NEW_POST_TEXT) {
 
             this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+
+        } else if(action.type === ADD_DIALOGS_MESSAGE) {
+            let newBlaBla = {
+                id: 6,
+                message: this._state.dialogsPage.newMessageText,
+                messageFriend: 0
+            };
+            this._state.dialogsPage.messages.push(newBlaBla);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state);
+
+        } else if(action.type === UPDATE_NEW_DIALOGS_MESSAGE) {
+
+            this._state.dialogsPage.newMessageText = action.newText;
             this._callSubscriber(this._state);
         }
     }
 }
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+
+export const updateNewPostTextActionCreatore = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+
+export const addDialogsMessageActionCreator = () => ({ type: ADD_DIALOGS_MESSAGE })
+
+export const updateNewDialogsMessageActionCreator = (text) => ({ type: UPDATE_NEW_DIALOGS_MESSAGE, newText: text })
 
 export default store;
 window.store = store;
