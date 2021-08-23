@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
-import {addDialogsMessageActionCreator, updateNewDialogsMessageActionCreator} from './../../redux/state'
+import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/state'
 
 const DialogItem = (props) => {
     let path = "/dialogs/" + props.id;
@@ -21,7 +21,7 @@ const DialogItem = (props) => {
 const Message = (props) => {
     return (
         <div className={s.dialog__chat}>
-            <div className={s.dialog__message + ' ' + s.dialog__left}>{props.messageFriend}</div>
+            {/*<div className={s.dialog__message + ' ' + s.dialog__left}>{props.messageFriend}</div>*/}
             <div className={s.dialog__message + ' ' + s.dialog__right}>{props.message}</div>
         </div>
     )
@@ -29,21 +29,20 @@ const Message = (props) => {
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />);
+    let state = props.store.getState().dialogsPage;
 
-    let messageElements = props.dialogsPage.messages.map(m => <Message id={m.id} message={m.message} messageFriend={m.messageFriend} />);
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />);
+    let messageElements = state.messages.map(m => <Message id={m.id} message={m.message} messageFriend={m.messageFriend} />);
+    let newMessageBody = state.newMessageBody;
 
-    let newMessageElement = React.createRef();
-
-    let addMessage = () => {
-        props.dispatch(addDialogsMessageActionCreator());
-    };
-
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value;
-        let action = updateNewDialogsMessageActionCreator(text);
-        props.dispatch(action);
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator());
     }
+
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body));
+    };
 
     return (
         <div className={s.dialogs}>
@@ -54,8 +53,12 @@ const Dialogs = (props) => {
                 { messageElements }
 
                 <div className={s.message__add}>
-                    <textarea ref={newMessageElement} onChange={onMessageChange} value={props.dialogsPage.newMessageText} />
-                    <button onClick={ addMessage }>Add message</button>
+                    <div>
+                        <textarea placeholder="Enter your message" onChange={ onNewMessageChange } value={ newMessageBody } />
+                    </div>
+                    <div>
+                        <button onClick={ onSendMessageClick }>Add message</button>
+                    </div>
                 </div>
             </div>
         </div>
