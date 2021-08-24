@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
+import StoreContext from "../../StoreContext";
 
 let FriendsItem = (props) => {
     return (
@@ -14,15 +15,22 @@ let FriendsItem = (props) => {
 };
 
 const Friends = (props) => {
-    let friendElements = props.state.friends.map(f => <FriendsItem avatar={f.avatar} name={f.name} />);
+    return <StoreContext.Consumer>
+        {
+            (store) => {
+                let state = store.getState().sidebar;
+                let friendElements = state.friends.map(f => <FriendsItem avatar={f.avatar} name={f.name}/>);
 
-    return (
-        <div className={s.friends}>
-            <div className={s.friends__list}>
-                { friendElements }
-            </div>
-        </div>
-    )
+                return (
+                    <div className={s.friends}>
+                        <div className={s.friends__list}>
+                            {friendElements}
+                        </div>
+                    </div>
+                )
+            }
+        }
+    </StoreContext.Consumer>
 };
 
 const Navbar = (props) => {
