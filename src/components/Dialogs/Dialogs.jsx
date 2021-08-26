@@ -1,31 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
-import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogsPage-reducer';
-
-const DialogItem = (props) => {
-    let path = "/dialogs/" + props.id;
-
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <div className={s.dialogs__avatar}>
-                <picture className={s.dialogs__picture}>
-                    <img src={props.avatar} alt="" className={s.dialogs__image}/>
-                </picture>
-            </div>
-            <NavLink to={path} className={s.dialog__link}>{props.name}</NavLink>
-        </div>
-    )
-};
-
-const Message = (props) => {
-    return (
-        <div className={s.dialog__chat}>
-            {/*<div className={s.dialog__message + ' ' + s.dialog__left}>{props.messageFriend}</div>*/}
-            <div className={s.dialog__message + ' ' + s.dialog__right}>{props.message}</div>
-        </div>
-    )
-};
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
 const Dialogs = (props) => {
 

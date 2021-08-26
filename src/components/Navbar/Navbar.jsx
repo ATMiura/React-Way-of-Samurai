@@ -1,37 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import StoreContext from "../../StoreContext";
-
-let FriendsItem = (props) => {
-    return (
-        <div className={s.friends__item}>
-            <picture>
-                <img src={props.avatar} alt="" className={s.friends__avatar} />
-            </picture>
-            <div className={s.friends__name}>{props.name}</div>
-        </div>
-    )
-};
-
-const Friends = (props) => {
-    return <StoreContext.Consumer>
-        {
-            (store) => {
-                let state = store.getState().sidebar;
-                let friendElements = state.friends.map(f => <FriendsItem avatar={f.avatar} name={f.name}/>);
-
-                return (
-                    <div className={s.friends}>
-                        <div className={s.friends__list}>
-                            {friendElements}
-                        </div>
-                    </div>
-                )
-            }
-        }
-    </StoreContext.Consumer>
-};
+import FriendsContainer from "./FriendsContainer";
 
 const Navbar = (props) => {
     return (
@@ -53,7 +23,7 @@ const Navbar = (props) => {
                     <a>Settings</a>
                 </div>
             </nav>
-            <Friends state={props.state} />
+            <FriendsContainer />
         </div>
     )
 };

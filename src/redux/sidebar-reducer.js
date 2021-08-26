@@ -1,3 +1,4 @@
+const FRIENDS_LIST = 'FRIENDS';
 
 let initialState = {
     friends: [
@@ -8,14 +9,14 @@ let initialState = {
 };
 
 const sidebarReducer = (state = initialState, action) => {
-    /*switch (action.type) {
-        case blablabla:
+    switch (action.type) {
+        case FRIENDS_LIST:
             return state;
         default:
             return state;
-    }*/
-
-    return state;
+    }
 };
+
+export const FriendsListCreator = () => ({ type: FRIENDS_LIST });
 
 export default  sidebarReducer;
