@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from "react-redux";
 import Friends from "./Friends";
 import {FriendsListCreator} from "../../redux/sidebar-reducer";

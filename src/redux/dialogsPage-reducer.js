@@ -7,8 +7,7 @@ let initialState = {
         {id: 2, avatar: 'https://i.pravatar.cc/300', name: 'Andrew'},
         {id: 3, avatar: 'https://i.pravatar.cc/300', name: 'Sveta'},
         {id: 4, avatar: 'https://i.pravatar.cc/300', name: 'Sasha'},
-        {id: 5, avatar: 'https://i.pravatar.cc/300', name: 'Viktor'},
-        {id: 6, avatar: 'https://i.pravatar.cc/300', name: 'Valera'}
+        {id: 5, avatar: 'https://i.pravatar.cc/300', name: 'Viktor'}
     ],
     messages: [
         {id: 1, message: 'Hi', },
@@ -21,22 +20,21 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
-    let stateCopy = {...state};
-
     switch (action.type) {
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            return {
+                ...state,
+                newMessageBody: action.body,
+            };
+        }
         case SEND_MESSAGE: {
             let body = state.newMessageBody;
-            stateCopy.messages = [...state.messages];
-            stateCopy.messages.push({id: 6, message: body});
-            stateCopy.newMessageBody = '';
-            return stateCopy;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}],
+            };
         }
-
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
-        }
-
         default:
             return state;
     }

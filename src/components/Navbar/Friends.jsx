@@ -4,7 +4,7 @@ import FriendsItem from "./FriendsItem/FriendsItem";
 
 const Friends  = (props) => {
     let state = props.sidebar;
-    let friendElements = state.friends.map(f => <FriendsItem avatar={f.avatar} name={f.name}/>);
+    let friendElements = state.friends.map(f => <FriendsItem key={f.id} avatar={f.avatar} name={f.name}/>);
 
     return(
         <div className={s.friends}>
