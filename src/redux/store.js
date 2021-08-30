@@ -31,6 +31,9 @@ let store = {
             ],
             newMessageBody: 'it-kamasutra.com dialogs message',
         },
+        usersPage: {
+
+        },
         sidebar: {
             friends: [
                 {id: 1, avatar: 'https://i.pravatar.cc/250', name: 'Dimych'},
@@ -56,6 +59,7 @@ let store = {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.usersPage = dialogsReducer(this._state.usersPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
         this._callSubscriber(this._state);

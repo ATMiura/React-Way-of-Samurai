@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
     return{
         sidebar: state.sidebar,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(FriendsListCreator());
         }
     }
-}
+};
 
 const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends);
 

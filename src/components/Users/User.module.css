@@ -1,0 +1,67 @@
+.users {
+
+}
+
+.user{
+    display: flex;
+    align-items: center;
+}
+.user__chat{
+    display: flex;
+    flex-direction: column;
+}
+.users__avatar{
+    margin-right: 15px;
+}
+.users__picture{
+
+}
+.users__image{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+.user__message{
+    border-radius: 10px;
+    padding: 10px;
+    background: white;
+}
+.user__left{
+    margin-right: auto;
+}
+.user__right{
+    margin-left: auto;
+}
+
+.usersItems {
+    padding: 10px;
+    background: white;
+    border-right: 1px solid #c1c1c1;
+}
+
+.usersItems .active {
+    color: gold;
+}
+.user__link{
+    color: #000;
+    text-decoration: none;
+}
+
+.users__follow{
+
+}
+.users__fullName{
+
+}
+.users__status{
+
+}
+.location{
+
+}
+.location__country{
+
+}
+.location__city{
+
+}

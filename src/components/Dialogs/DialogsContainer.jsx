@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
     return{
         dialogsPage: state.dialogsPage
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return{
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(updateNewMessageBodyCreator(body))
         },
     }
-}
+};
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
