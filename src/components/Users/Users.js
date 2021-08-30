@@ -4,12 +4,6 @@ import * as axios from "axios";
 
 class Users extends React.Component{
 
-    constructor(props) {
-        super(props);
-
-        this.getUsers();
-    }
-
     getUsers = () => {
         if (this.props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
@@ -19,7 +13,13 @@ class Users extends React.Component{
         }
     };
 
+    componentDidMount() {
+        /* All side effects */
+        this.getUsers();
+    }
+
     render() {
+        /* Метод render обязательно вегда есть в классовой комопоненте */
         return (
             <div className={s.users}>
                 <div className={s.usersItems}>
