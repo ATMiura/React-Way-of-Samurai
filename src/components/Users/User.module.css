@@ -65,3 +65,27 @@
 .location__city{
 
 }
+
+.show__more{
+    margin-bottom: 20px;
+}
+
+.pagination{
+    margin-bottom: 20px;
+}
+.pagination__list{
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+.pagination__item{
+    margin: 0 10px;
+    cursor: pointer;
+}
+.pagination__item.active{
+    font-size: 18px;
+    font-weight: bold;
+}
