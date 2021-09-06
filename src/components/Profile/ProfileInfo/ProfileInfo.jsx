@@ -12,8 +12,8 @@ const ProfileInfo = (props) => {
         {
             if([value]!='') return(
                 <div className={s.contacts__item}>
-                    <a href={`${key}`} className={s.contacts__link}>
-                        {`${value}`}
+                    <a href={`${value}`} className={s.contacts__link} target="_blank">
+                        {`${key}`}
                     </a>
                 </div>
         )}

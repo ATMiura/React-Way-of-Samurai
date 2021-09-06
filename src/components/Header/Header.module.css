@@ -1,9 +1,48 @@
 .header {
     grid-area: h;
     background-color: green;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.header img {
-    width: 20px;
+.header__logo{
+
+}
+.logo{
+
+}
+.logo__picture{
+    display: inline-block;
+}
+.logo__image{
+    max-width: 250px;
+    height: auto;
 }
 
+.login{
+    text-decoration: none;
+}
+.login__name{
+    cursor: pointer;
+}
+
+.btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 250px;
+    padding: 10px;
+    background: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    transition: .2s;
+}
+.btn:hover{
+    background: cornflowerblue;
+    color: white;
+}
