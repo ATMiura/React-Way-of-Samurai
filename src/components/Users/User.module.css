@@ -32,8 +32,7 @@
 .user__right{
     margin-left: auto;
 }
-
-.usersItems {
+.users__list{
     padding: 10px;
     background: white;
     border-right: 1px solid #c1c1c1;

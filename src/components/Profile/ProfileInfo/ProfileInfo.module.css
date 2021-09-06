@@ -1,3 +1,68 @@
 .descriptionBlock {
     padding: 10px;
 }
+.profile{
+    padding: 10px;
+}
+.profile__avatar{
+
+}
+.profile__info{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+.profile__description{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.profile__picture{
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 0;
+    line-height: 0;
+}
+.profile__image{
+
+}
+.profile__about{
+    margin-bottom: 20px;
+}
+.profile__jobStatus{
+
+}
+
+.contacts{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.contacts__title{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.contacts__list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.contacts__item{
+
+}
+.contacts__link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid;
+    color: #000;
+    text-decoration: none;
+    transition: .2s;
+}
+.contacts__link:hover{
+    background: #000;
+    color: #fff;
+}
+.contacts__item:not(:last-child){
+    margin-right: 5px;
+}
