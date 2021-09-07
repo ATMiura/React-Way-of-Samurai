@@ -18,15 +18,15 @@ export const usersAPI = {
             });
     },
 
-    follow(id) {
-        return instance.post(`follow/${id}`)
+    follow(userId) {
+        return instance.post(`follow/${userId}`)
             .then(response => {
                 return response.data;
             });
     },
 
-    unFollow(id) {
-        return instance.delete(`follow/${id}`)
+    unFollow(userId) {
+        return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data;
             });
