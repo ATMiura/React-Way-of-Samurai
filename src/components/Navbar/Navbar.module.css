@@ -20,7 +20,12 @@
 .friends{
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
     padding: 20px 10px 10px 10px;
+}
+.friends__title{
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 .friends__list{
     display: flex;

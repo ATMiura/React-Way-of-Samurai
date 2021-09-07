@@ -12,6 +12,8 @@
 .app-wrapper-content {
     grid-area: c;
     background-color: cornflowerblue;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 

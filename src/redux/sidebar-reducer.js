@@ -1,22 +1,24 @@
-const FRIENDS_LIST = 'FRIENDS';
+const FRIENDS_LIST = 'FRIENDS_LIST';
+const TOGGLE_IS_FETCHING = 'IS_FETCHING';
 
 let initialState = {
-    friends: [
-        {id: 1, avatar: 'https://i.pravatar.cc/250', name: 'Dimych'},
-        {id: 2, avatar: 'https://i.pravatar.cc/250', name: 'Andrew'},
-        {id: 3, avatar: 'https://i.pravatar.cc/250', name: 'Sveta'},
-    ]
+    friends: [],
+    isFetching: false
 };
 
 const sidebarReducer = (state = initialState, action) => {
     switch (action.type) {
         case FRIENDS_LIST:
-            return state;
+            return {...state, friends: action.friends }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state;
     }
 };
 
-export const FriendsListCreator = () => ({ type: FRIENDS_LIST });
+export const setFriends = (friends) => ({ type: FRIENDS_LIST, friends });
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
 export default  sidebarReducer;

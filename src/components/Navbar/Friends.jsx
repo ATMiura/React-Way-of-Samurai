@@ -1,19 +1,34 @@
 import React from 'react';
 import s from './Navbar.module.css';
-import FriendsItem from "./FriendsItem/FriendsItem";
+import userStyles from '../Users/User.module.css';
+import Preloader from "../Common/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 const Friends  = (props) => {
-    let state = props.sidebar;
-    let friendElements = state.friends.map(f => <FriendsItem key={f.id} avatar={f.avatar} name={f.name}/>);
+    if(!props.friends) {
+        return <Preloader/>
+    }
 
-    return(
-        <div className={s.friends}>
-            <div className={s.friends__list}>
-                {friendElements}
-            </div>
+    let friendElements = props.friends.map(f => {
+        return (
+            f.followed ? <div className={s.friends__item}>
+                <NavLink to={'/profile/' + f.id} className={userStyles.user__link}>
+                    <picture className={userStyles.users__picture}>
+                        <img src={f.photos.small != null ? f.profile.photos.small : 'https://i.pravatar.cc/270' } alt="" className={userStyles.users__image} />
+                    </picture>
+                    <div className={s.friends__name}>{f.name}</div>
+                </NavLink>
+            </div> : null
+        )
+    });
+
+    return !friendElements ? <div className={s.friends}>
+        <h3 className={s.friends__title}>Список друзей</h3>
+        <div className={s.friends__list}>
+            {friendElements}
         </div>
-    )
-}
+    </div> : null
+};
 
 
 export default Friends;

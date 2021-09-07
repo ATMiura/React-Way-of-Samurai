@@ -79,6 +79,9 @@
     margin: 0;
 
     list-style: none;
+
+    max-width: 100%;
+    overflow: auto;
 }
 .pagination__item{
     margin: 0 10px;
