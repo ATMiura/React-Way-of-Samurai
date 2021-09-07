@@ -22,7 +22,7 @@ const Friends  = (props) => {
         )
     });
 
-    return !friendElements ? <div className={s.friends}>
+    return friendElements[0] !='' ? <div className={s.friends}>
         <h3 className={s.friends__title}>Список друзей</h3>
         <div className={s.friends__list}>
             {friendElements}
