@@ -4,17 +4,15 @@ import Friends from "./Friends";
 import {setFriends, toggleIsFetching} from "../../redux/sidebar-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import * as axios from "axios";
+import {usersAPI} from "../../api/api";
 
 class FriendsContainer extends React.Component{
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/`,{
-            withCredentials: true,
-        })
-            .then(response => {
+        usersAPI.getUsers().then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setFriends(response.data.items);
+                this.props.setFriends(data.items);
             });
     }
 
