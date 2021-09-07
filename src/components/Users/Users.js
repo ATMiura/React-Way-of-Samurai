@@ -3,6 +3,7 @@ import s from "./User.module.css";
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
 import {usersAPI} from "../../api/api";
+import {toggleFollowingProgress} from "../../redux/usersReducer";
 
 let Users = (props) => {
 
@@ -33,19 +34,23 @@ let Users = (props) => {
                                         </picture>
                                     </NavLink>
                                     {u.followed
-                                        ? <button onClick={() => {
+                                        ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                            props.toggleFollowingProgress(true, u.id);
                                             usersAPI.unFollow(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.unfollow(u.id)
                                                     }
+                                                props.toggleFollowingProgress(false, u.id);
                                                 });
                                         }}>Unfollow</button>
 
-                                        : <button onClick={() => {
+                                        : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                            props.toggleFollowingProgress(true, u.id);
                                             usersAPI.follow(u.id).then(data => {
                                                     if (data.resultCode === 0) {
                                                         props.follow(u.id)
                                                     }
+                                                props.toggleFollowingProgress(false, u.id);
                                                 });
                                         }}>Follow</button>
                                     }

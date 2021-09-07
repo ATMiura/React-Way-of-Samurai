@@ -30,14 +30,18 @@
 .friends__list{
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
 }
 .friends__item{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
+    flex: 0 0 50%;
+}
+.friends__item:not(:last-child){
+    margin-bottom: 15px;
 }
 .friends__avatar{
     border-radius: 100%;

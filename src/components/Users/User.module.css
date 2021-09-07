@@ -14,7 +14,7 @@
     margin-right: 15px;
 }
 .users__picture{
-
+    display: inline-block;
 }
 .users__image{
     width: 50px;
@@ -42,6 +42,7 @@
     color: gold;
 }
 .user__link{
+    text-align: center;
     color: #000;
     text-decoration: none;
 }
