@@ -9,7 +9,7 @@ let instance = axios.create({
 });
 
 export const authAPI = {
-    auth(){
+    me(){
         return instance.get(`auth/me`)
             .then(response => {
                 return response.data;
@@ -47,9 +47,6 @@ export const usersAPI = {
             });
     },
 
-};
-
-export const profileAPI = {
     getProfile(userId) {
         return instance.get(`profile/${userId}`)
             .then(response => {

@@ -4,7 +4,8 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialo
 
 const mapStateToProps = (state) => {
     return{
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 };
 

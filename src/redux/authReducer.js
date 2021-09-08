@@ -31,15 +31,13 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login) => ({ type: SET_USER_DATA, data: {userId, email, login} });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
-export const getAuth = () => {
+export const getAuthUserData = () => {
     return (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        authAPI.auth()
+        authAPI.me()
             .then(data => {
                 if(data.resultCode === 0){
                     let {id, email, login} = data.data;
                     dispatch(setAuthUserData(id, email, login));
-                    dispatch(toggleIsFetching(false));
                 }
             });
     }
