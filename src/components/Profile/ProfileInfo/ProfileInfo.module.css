@@ -26,6 +26,15 @@
 .profile__image{
 
 }
+.profile__status{
+    margin-bottom: 20px;
+}
+.profile__status__item{
+
+}
+.profile__status__input{
+
+}
 .profile__about{
     margin-bottom: 20px;
 }
