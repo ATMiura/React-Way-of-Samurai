@@ -8,11 +8,26 @@ let instance = axios.create({
     }
 });
 
+export const authAPI = {
+    auth(){
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data;
+            });
+    }
+};
 
 export const usersAPI = {
 
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
+                return response.data;
+            });
+    },
+
+    getFriends() {
+        return instance.get(`users?friend=true`)
             .then(response => {
                 return response.data;
             });

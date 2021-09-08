@@ -3,6 +3,7 @@ import {usersAPI} from "../api/api";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_FRIENDS = 'SET_FRIENDS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'IS_FETCHING';
@@ -10,11 +11,12 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
     users: [],
+    friends: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -42,6 +44,9 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS: {
             return {...state, users: action.users }
         }
+        case SET_FRIENDS: {
+            return {...state, friends: action.friends }
+        }
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
@@ -66,6 +71,7 @@ const usersReducer = (state = initialState, action) => {
 export const followSuccess = (userId) => ({ type: FOLLOW, userId });
 export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setFriends = (friends) => ({ type: SET_FRIENDS, friends });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage: currentPage });
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
@@ -83,6 +89,15 @@ export const getUsers = (currentPage, pageSize) => {
     }
 };
 
+export const getFriends = () => {
+    return (dispatch) => {
+        usersAPI.getFriends()
+            .then(data=>{
+                dispatch(setFriends(data.items));
+            });
+    }
+};
+
 export const follow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
@@ -90,6 +105,7 @@ export const follow = (userId) => {
             .then(data => {
                 if (data.resultCode === 0) dispatch(followSuccess(userId));
                 dispatch(toggleFollowingProgress(false, userId));
+                dispatch(getFriends());
             });
     }
 };
@@ -101,8 +117,9 @@ export const unFollow = (userId) => {
             .then(data => {
                 if (data.resultCode === 0) dispatch(unfollowSuccess(userId));
                 dispatch(toggleFollowingProgress(false, userId));
+                dispatch(getFriends());
             });
     }
 };
 
-export default  usersReducer;
+export default usersReducer;

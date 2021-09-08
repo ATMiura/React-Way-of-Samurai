@@ -11,25 +11,23 @@ const Friends  = (props) => {
 
     let friendElements = props.friends.map(f => {
         return (
-            f.followed ? <div className={s.friends__item} key={f.id}>
+            <div className={s.friends__item} key={f.id}>
                 <NavLink to={'/profile/' + f.id} className={userStyles.user__link}>
                     <picture className={userStyles.users__picture}>
                         <img src={f.photos.small != null ? f.profile.photos.small : 'https://i.pravatar.cc/270' } alt="" className={userStyles.users__image} />
                     </picture>
                     <div className={s.friends__name}>{f.name}</div>
                 </NavLink>
-            </div> : null
+            </div>
         )
     });
 
-    return (
-        <div className={s.friends}>
-            <h3 className={s.friends__title}>Список друзей</h3>
-            <div className={s.friends__list}>
-                {friendElements}
-            </div>
+    return props.friends.length ? <div className={s.friends}>
+        <h3 className={s.friends__title}>Список друзей</h3>
+        <div className={s.friends__list}>
+            {friendElements}
         </div>
-    )
+    </div> : null
 };
 
 

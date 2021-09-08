@@ -4,16 +4,13 @@ import Friends from "./Friends";
 import {setFriends, toggleIsFetching, setTotalUsersCount} from "../../redux/sidebar-reducer";
 import Preloader from "../Common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
+import {getFriends} from "../../redux/usersReducer";
 
 class FriendsContainer extends React.Component{
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        usersAPI.getUsers(null, this.props.totalCount).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setFriends(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+        this.props.getFriends();
     }
 
     render() {
@@ -29,9 +26,9 @@ class FriendsContainer extends React.Component{
 const mapStateToProps = (state) => {
     return{
         sidebar: state.sidebar,
-        friends: state.usersPage.users,
+        friends: state.usersPage.friends,
         totalUsersCount: state.usersPage.totalUsersCount,
     }
 };
 
-export default connect(mapStateToProps, {setFriends, toggleIsFetching, setTotalUsersCount})(FriendsContainer);
+export default connect(mapStateToProps, {setFriends, toggleIsFetching, setTotalUsersCount, getFriends})(FriendsContainer);
