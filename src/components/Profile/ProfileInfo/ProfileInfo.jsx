@@ -29,7 +29,9 @@ const ProfileInfo = (props) => {
                         </picture>
                     </div>
                     <div className={s.profile__description}>
+
                         <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+
                         <div className={s.profile__about}>{props.profile.aboutMe}</div>
                         <div className={s.profile__jobStatus}>{props.profile.lookingForAJobDescription}</div>
                     </div>
