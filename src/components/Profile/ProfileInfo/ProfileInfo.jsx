@@ -9,8 +9,7 @@ const ProfileInfo = (props) => {
     if(!props.profile) {
         return <Preloader/>
     }
-    let ContactsElements = Object.entries(props.profile.contacts).map(([key,value],c) =>
-        {
+    let ContactsElements = Object.entries(props.profile.contacts).map(([key,value],c) => {
             if([value]!='') return(
                 <div className={s.contacts__item}>
                     <a href={`${value}`} className={s.contacts__link} target="_blank">
@@ -30,7 +29,7 @@ const ProfileInfo = (props) => {
                         </picture>
                     </div>
                     <div className={s.profile__description}>
-                        <ProfileStatus status={'Hello hello my friends'} />
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
                         <div className={s.profile__about}>{props.profile.aboutMe}</div>
                         <div className={s.profile__jobStatus}>{props.profile.lookingForAJobDescription}</div>
                     </div>
