@@ -1,5 +1,6 @@
 import {authAPI, usersAPI} from "../api/api";
 import {setTotalUsersCount, setUsers} from "./usersReducer";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'IS_FETCHING';
@@ -45,6 +46,9 @@ export const logIn = (email, password, rememberMe) => (dispatch) => {
         .then(response => {
             if(response.data.resultCode === 0){
                 dispatch(getAuthUserData());
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+                dispatch(stopSubmit('login', { _error: message}));
             }
         });
 };
