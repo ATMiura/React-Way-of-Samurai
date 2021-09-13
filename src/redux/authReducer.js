@@ -9,7 +9,7 @@ let initialState = {
     email: null,
     login: null,
     isAuth: false,
-    isFetching: false
+    isFetching: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,8 +17,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true,
+                ...action.payload,
             }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
@@ -28,19 +27,35 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-export const setAuthUserData = (userId, email, login) => ({ type: SET_USER_DATA, data: {userId, email, login} });
+export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: {userId, email, login, isAuth} });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        authAPI.me()
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    let {id, email, login} = response.data.data;
-                    dispatch(setAuthUserData(id, email, login));
-                }
-            });
-    }
+export const getAuthUserData = () => (dispatch) => {
+    authAPI.me()
+        .then(response => {
+            if(response.data.resultCode === 0){
+                let {id, email, login} = response.data.data;
+                dispatch(setAuthUserData(id, email, login, true));
+            }
+        });
+};
+
+export const logIn = (email, password, rememberMe) => (dispatch) => {
+    authAPI.logIn(email, password, rememberMe)
+        .then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(getAuthUserData());
+            }
+        });
+};
+
+export const logOut = () => (dispatch) => {
+    authAPI.logOut()
+        .then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(setAuthUserData(null, null, null, false));
+            }
+        });
 };
 
 export default  authReducer;

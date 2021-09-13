@@ -22,10 +22,12 @@
 }
 
 .login{
+    display: flex;
+    align-items: center;
     text-decoration: none;
 }
 .login__name{
-    cursor: pointer;
+
 }
 
 .btn{
@@ -41,6 +43,9 @@
     font-weight: 500;
     color: #000;
     transition: .2s;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
 }
 .btn:hover{
     background: cornflowerblue;
