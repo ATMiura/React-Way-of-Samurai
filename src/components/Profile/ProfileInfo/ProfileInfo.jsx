@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 const ProfileInfo = (props) => {
@@ -29,7 +30,7 @@ const ProfileInfo = (props) => {
                     </div>
                     <div className={s.profile__description}>
 
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
 
                         <div className={s.profile__about}>{props.profile.aboutMe}</div>
                         <div className={s.profile__jobStatus}>{props.profile.lookingForAJobDescription}</div>
