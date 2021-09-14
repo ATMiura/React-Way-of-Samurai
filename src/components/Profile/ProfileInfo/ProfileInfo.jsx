@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
-import Post from "../MyPosts/Post/Post";
 import ProfileStatus from "./ProfileStatus";
 
 
@@ -10,9 +9,9 @@ const ProfileInfo = (props) => {
         return <Preloader/>
     }
     let ContactsElements = Object.entries(props.profile.contacts).map(([key,value],c) => {
-            if([value]!='') return(
+            if([value]!=='') return(
                 <div className={s.contacts__item}>
-                    <a href={`${value}`} className={s.contacts__link} target="_blank">
+                    <a href={`${value}`} className={s.contacts__link}>
                         {`${key}`}
                     </a>
                 </div>

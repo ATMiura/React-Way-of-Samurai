@@ -1,5 +1,4 @@
-import {authAPI, usersAPI} from "../api/api";
-import {setTotalUsersCount, setUsers} from "./usersReducer";
+import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';

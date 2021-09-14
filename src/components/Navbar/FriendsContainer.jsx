@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import Friends from "./Friends";
 import {setFriends, toggleIsFetching, setTotalUsersCount} from "../../redux/sidebar-reducer";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 import {getFriends} from "../../redux/usersReducer";
 
 class FriendsContainer extends React.Component{
