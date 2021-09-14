@@ -7,7 +7,7 @@ import {Textarea} from "../../Common/FormControls/FormControls";
 
 const MyPosts = React.memo(props => {
 
-    let PostsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
+    let PostsElements = [...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     let onAddPost = (values) => {
         props.addPost(values.newPostText);
