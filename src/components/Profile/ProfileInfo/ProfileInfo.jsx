@@ -1,15 +1,14 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
-const ProfileInfo = (props) => {
-    if(!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if(!profile) {
         return <Preloader/>
     }
-    let ContactsElements = Object.entries(props.profile.contacts).map(([key,value],c) => {
+    let ContactsElements = Object.entries(profile.contacts).map(([key,value],c) => {
             if([value]!=='') return(
                 <div className={s.contacts__item}>
                     <a href={`${value}`} className={s.contacts__link}>
@@ -21,19 +20,19 @@ const ProfileInfo = (props) => {
 
     return (
         <>
-            <div className={s.profile} id={props.profile.userId}>
+            <div className={s.profile} id={profile.userId}>
                 <div className={s.profile__info}>
                     <div className={s.profile__avatar}>
                         <picture className={s.profile__picture}>
-                            <img src={props.profile.photos.large != null ? props.profile.photos.large : 'https://i.pravatar.cc/270' } alt="" className={s.profile__image}/>
+                            <img src={profile.photos.large != null ? profile.photos.large : 'https://i.pravatar.cc/270' } alt="" className={s.profile__image}/>
                         </picture>
                     </div>
                     <div className={s.profile__description}>
 
-                        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+                        <ProfileStatusWithHooks propStatus={status} updateStatus={updateStatus} />
 
-                        <div className={s.profile__about}>{props.profile.aboutMe}</div>
-                        <div className={s.profile__jobStatus}>{props.profile.lookingForAJobDescription}</div>
+                        <div className={s.profile__about}>{profile.aboutMe}</div>
+                        <div className={s.profile__jobStatus}>{profile.lookingForAJobDescription}</div>
                     </div>
                 </div>
                 <div className={s.contacts}>
