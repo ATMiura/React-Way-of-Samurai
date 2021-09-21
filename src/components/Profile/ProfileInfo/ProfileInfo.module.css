@@ -5,7 +5,22 @@
     padding: 10px;
 }
 .profile__avatar{
-
+    position: relative;
+    margin-right: 15px;
+}
+.profile__avatarChange__label{
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.51);
+    font-size: 20px;
+    color: #fff;
+}
+.profile__avatar:hover .profile__avatarChange__label{
+    display: flex;
+    cursor: pointer;
 }
 .profile__info{
     display: flex;
@@ -19,9 +34,14 @@
 }
 .profile__picture{
     display: inline-block;
-    margin-right: 15px;
     font-size: 0;
     line-height: 0;
+}
+.profile__avatarChange__label{
+
+}
+.profile__avatarChange__input{
+
 }
 .profile__image{
 
