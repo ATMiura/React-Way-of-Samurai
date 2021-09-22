@@ -10,16 +10,25 @@
 }
 .profile__avatarChange__label{
     display: none;
+    overflow: hidden;
     position: absolute;
     inset: 0;
+
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.51);
-    font-size: 20px;
     color: #fff;
+
+    margin: 15px;
+    padding: 15px;
+    border: 2px dashed white;
+    text-align: center;
+    font-size: 14px;
 }
-.profile__avatar:hover .profile__avatarChange__label{
+.profile__avatar:hover .profile__avatarChange__label,
+.profile__avatar.dropAreaActive .profile__avatarChange__label{
     display: flex;
+    height: auto;
     cursor: pointer;
 }
 .profile__info{

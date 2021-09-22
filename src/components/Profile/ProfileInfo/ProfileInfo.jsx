@@ -10,6 +10,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
     }
 
     let [editMode, setEditMode] = useState(false);
+    const [drag, setDrag] = useState(false);
 
     let ContactsElements = Object.entries(profile.contacts).map(([key,value],c) => {
             if([value]!='')
@@ -27,19 +28,51 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
             savePhoto(e.target.files[0]);
         }
     };
+    
+    function dragStartHandler(e) {
+        e.preventDefault();
+        setDrag(true);
+    }
+    function dragLeaveHandler(e) {
+        e.preventDefault();
+        setDrag(false);
+    }
+    function onDropHandler(e) {
+        e.preventDefault();
+        setDrag(false);
+        let files = [...e.dataTransfer.files];
+        //console.log(files);
+
+        if(files){
+            savePhoto(files[0]);
+        }
+    }
 
     return (
         <>
             <div className={s.profile} id={profile.userId}>
                 <div className={s.profile__info}>
 
-                    <div className={s.profile__avatar}>
+                    <div className={`${s.profile__avatar} ${drag && s.dropAreaActive}`}
+                         onDragOver={e => dragStartHandler(e)}
+                    >
                         <picture className={s.profile__picture}>
                             <img src={profile.photos.large != null ? profile.photos.large : 'https://i.pravatar.cc/270' } alt="" className={s.profile__image}/>
                         </picture>
-                        { isOwner && <label className={s.profile__avatarChange__label}>
-                            <input type={'file'} onChange={onMainPhotoSelected} hidden />
-                            <span>Сменить аватар</span>
+                        { isOwner &&
+                            <label
+                                className={s.profile__avatarChange__label + ' ' + s.dropArea}
+                                   onDragStart={e => dragStartHandler(e)}
+                                   onDragLeave={e => dragLeaveHandler(e)}
+                                   onDragOver={e => dragStartHandler(e)}
+                                   onDrop={e => onDropHandler(e)}
+                            >
+                                <input type={'file'} onChange={onMainPhotoSelected} hidden />
+                            {
+                                drag
+                                    ? `Отпустите аватар, <br/> чтобы загрузить его`
+                                    : `Перетащите аватар, чтобы загрузить его`
+                            }
                         </label> }
                     </div>
 
