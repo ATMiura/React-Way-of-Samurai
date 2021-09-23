@@ -34,7 +34,20 @@
 .profile__info{
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
     margin-bottom: 20px;
+}
+.profile__infoSection{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.profile__infoLabel{
+    margin-bottom: 5px;
+}
+.profile__infoField{
+
 }
 .profile__description{
     display: flex;

@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
+import ProfileData from "./ProfileData";
 
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     if(!profile) {
         return <Preloader/>
     }
@@ -12,16 +14,15 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
     let [editMode, setEditMode] = useState(false);
     const [drag, setDrag] = useState(false);
 
-    let ContactsElements = Object.entries(profile.contacts).map(([key,value],c) => {
-            if([value]!='')
-                return(
-                <div className={s.contacts__item}>
-                    <a href={`${value}`} className={s.contacts__link}>
-                        {`${key}`}
-                    </a>
-                </div>
-        )}
-    );
+    const ContactsElements = ({contactTitle, contactValue}) => {
+        return (
+            <div className={s.contacts__item}>
+                <a href={contactValue} className={s.contacts__link}>
+                    {contactTitle}
+                </a>
+            </div>
+        )
+    };
 
     const onMainPhotoSelected = (e) => {
         if(e.target.files.length){
@@ -41,20 +42,23 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
         e.preventDefault();
         setDrag(false);
         let files = [...e.dataTransfer.files];
-        //console.log(files);
 
         if(files){
             savePhoto(files[0]);
         }
     }
 
+    const onSubmit = (formData) => {
+        saveProfile(formData);
+        setEditMode(false);
+    };
+
     return (
         <>
             <div className={s.profile} id={profile.userId}>
                 <div className={s.profile__info}>
 
-                    <div className={`${s.profile__avatar} ${drag && s.dropAreaActive}`}
-                         onDragOver={e => dragStartHandler(e)}
+                    <div className={`${s.profile__avatar} ${drag && s.dropAreaActive}`} onDragOver={e => dragStartHandler(e)}
                     >
                         <picture className={s.profile__picture}>
                             <img src={profile.photos.large != null ? profile.photos.large : 'https://i.pravatar.cc/270' } alt="" className={s.profile__image}/>
@@ -81,7 +85,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
                         <ProfileStatusWithHooks propStatus={status} updateStatus={updateStatus} />
 
                         { editMode
-                          ? <ProfileDataForm profile={profile} />
+                          ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit} />
                           : <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={profile} isOwner={isOwner} />
                         }
                     </div>
@@ -89,53 +93,12 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto,}) => {
                 <div className={s.contacts}>
                     <h3 className={s.contacts__title}>Ищите меня тут</h3>
                     <div className={s.contacts__list}>
-                        { ContactsElements }
+                        { Object.keys(profile.contacts).map(key => {
+                            return profile.contacts[key] ? <ContactsElements key={key} contactTitle={key} contactValue={profile.contacts[key]} /> : ''
+                        }) }
                     </div>
                 </div>
             </div>
-        </>
-    )
-};
-
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
-    return (
-        <>
-            { isOwner && <div className={s.profile__info}><button onClick={goToEditMode}>Edit Profile</button></div> }
-
-            <div className={s.profile__info}>
-                { profile.fullName
-                    ? <div className={s.profile__fullName}><b>Full Name:</b> {profile.fullName}</div>
-                    : ''
-                }
-            </div>
-            <div className={s.profile__info}>
-                { profile.lookingForAJob
-                    ?  <div className={s.profile__lookingForAJob}><b>Looking for a job: </b> {profile.lookingForAJob}</div>
-                    : "No"
-                }
-            </div>
-            <div className={s.profile__info}>
-                { profile.lookingForAJobDescription
-                    ?  <div className={s.profile__lookingForAJob}><b>My prof. skills:</b> {profile.lookingForAJobDescription}</div>
-                    : "No"
-                }
-            </div>
-            <div className={s.profile__info}>
-                { profile.aboutMe
-                    ? <div className={s.profile__about}><b>About me:</b> {profile.aboutMe}</div>
-                    : "Не работаю"
-                }
-            </div>
-        </>
-    )
-};
-
-const ProfileDataForm = ({profile}) => {
-    return (
-        <>
-            <form>
-                form
-            </form>
         </>
     )
 };
