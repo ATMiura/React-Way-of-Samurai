@@ -21,10 +21,10 @@ const UserItem = ({user, followingInProgress, unFollow, follow}) => {
                     <div className={s.users__fullName}>{user.name}</div>
                     <div className={s.users__status}>{user.status}</div>
                 </div>
-                <div className={s.location}>
+                {/*<div className={s.location}>
                     <div className={s.location__country}>user.location.country</div>
                     <div className={s.location__city}>user.location.city</div>
-                </div>
+                </div>*/}
             </div>
         </>
     )

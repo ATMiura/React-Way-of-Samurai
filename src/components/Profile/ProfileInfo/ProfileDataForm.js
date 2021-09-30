@@ -2,6 +2,7 @@ import React from "react";
 import s from "./ProfileInfo.module.css";
 import {createField, Input, Textarea} from "../../Common/FormControls/FormControls";
 import {reduxForm} from "redux-form";
+import style from "../../Common/FormControls/FormControls.module.css";
 
 const ProfileDataForm = ({handleSubmit, error, profile}) => {
     return (
@@ -10,6 +11,9 @@ const ProfileDataForm = ({handleSubmit, error, profile}) => {
                 <div className={s.profile__infoSection}>
                     <button>Сохранить изменения</button>
                 </div>
+
+                { error && <div className={style.formSummaryError}>{ error }</div> }
+
                 <div className={s.profile__infoSection}>
                     <b className={s.profile__infoLabel}>Имя:</b>
                     <div className={s.profile__infoField}>
@@ -38,7 +42,7 @@ const ProfileDataForm = ({handleSubmit, error, profile}) => {
                     <b className={s.profile__infoLabel}>Контакты:</b>
                     <div className={s.profile__contactsList}>
                         {Object.keys(profile.contacts).map(key => {
-                            return <div className={s.contacts__item}>
+                            return <div key={key} className={s.contacts__item}>
                                 <b>{key}: {createField(key, "contacts." + key, [], Input)}</b>
                             </div>
                         })}

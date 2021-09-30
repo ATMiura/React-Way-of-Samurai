@@ -1,11 +1,10 @@
 import * as axios from "axios";
-import {savePhoto} from "../redux/profile-reducer";
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': '71bf1527-c8d8-481e-96e4-9752451e87e0'
+        'API-KEY': '2763c815-b574-4e65-88c7-78e138d5bb90'
     }
 });
 
@@ -13,12 +12,18 @@ export const authAPI = {
     me(){
         return instance.get(`auth/me`);
     },
-    logIn(email, password, rememberMe = false){
-        return instance.post(`auth/login`, {email, password, rememberMe});
+    logIn(email, password, rememberMe = false, captcha = null){
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha});
     },
     logOut(){
         return instance.delete(`auth/login`);
-    }
+    },
+};
+
+export const securityAPI = {
+    getCaptchaUrl(){
+        return instance.get(`security/get-captcha-url`);
+    },
 };
 
 export const usersAPI = {
